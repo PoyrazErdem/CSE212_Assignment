@@ -29,7 +29,10 @@ public class Date {
 	private static int extremeDetailDate(int month, int year) {
         if (month < 8) {
             if (month % 2 == 1) return 31;
-            if (month == 2) return (year % 4 == 0) ? 29 : 28; 
+            if (month == 2) {
+            	if((year % 4 == 0 && year %	100 != 0) || (year % 400 == 0)) return 29;
+            	else return 28;
+            }
             return 30;
 
         }
@@ -42,4 +45,22 @@ public class Date {
 	public String toString() {
 		return day + "/" + month + "/" + year;
 	}
+	public static void DateValidator(int day, int month, int year) throws NotValidDateException{
+		int currentYear = AssigmentMain.currentDate.year;
+		int currentMonth = AssigmentMain.currentDate.month;
+		int currentDay = AssigmentMain.currentDate.day;
+		if(year != currentYear || month != currentMonth || day != currentDay) {
+			throw new NotValidDateException(null);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

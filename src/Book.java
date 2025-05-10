@@ -41,4 +41,38 @@ public class Book extends LibraryMaterial{
 	public double calculateCost() {
 		return bookCost;
 	}
+	
+	public static void authenticateISBN(String ISBN) throws Exception {
+		if(ISBN.length() != 14 || ISBN.charAt(3) != '-') {
+			throw new IllegalArgumentException();
+		}
+		int sum = 0;
+		char[] ISBNCharArray = ISBN.toCharArray();
+		boolean multby1 = true;
+		for(char c :ISBNCharArray) {
+			if(c == '-') {
+				continue;
+			}
+			if(multby1) {
+				sum += c*1;
+			}
+			if(!multby1) {
+				sum += c*3;
+			}
+			multby1 = !multby1;
+		}
+		if(sum%10 != 0) {
+			throw new ISBNMismatchException(ISBN);
+		}
+	}	
 }
+
+
+
+
+
+
+
+
+
+

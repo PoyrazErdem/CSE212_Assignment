@@ -59,8 +59,19 @@ public class Menu {
 		System.out.print("Enter book name: ");
 		scan.nextLine();
 		String nameofBook = scan.nextLine();
-		System.out.print("ISBN: ");
-		String ISBN = scan.nextLine();
+		boolean tryit = true;
+		String ISBN = null;
+		do {
+			try {
+				System.out.print("ISBN: ");
+				ISBN = scan.nextLine();
+				Book.authenticateISBN(ISBN);
+				tryit = false;
+			} catch (Exception e) {
+				System.err.println("ISBN number is invalid, please try again");;
+			}
+		}
+		while(tryit);
 		System.out.print("price: ");
 		int price = scan.nextInt();
 		System.out.println();
@@ -169,8 +180,20 @@ public class Menu {
 					System.out.println("Book quota has been reached for the member named " + member.getMemberName());
 					return;
 				}
-				System.out.print("Search for a Book with ISBN: ");
-				String checkedISBN = scan.nextLine();
+				String checkedISBN = null;
+				boolean tryit = true;
+				do {
+					try {
+						System.out.print("Search for a Book with ISBN: ");
+						checkedISBN = scan.nextLine();
+						Book.authenticateISBN(checkedISBN);
+						tryit = false;
+					}
+					catch(Exception e) {
+						System.err.println("ISBN number is invalid, please try again");
+					}
+				}
+				while(tryit);
 				if(Book.bookArray.size() == 0) {
 					System.out.println();
 					System.out.println("The book list is empty");
@@ -180,16 +203,36 @@ public class Menu {
 				for(int index2 = 0; index2 < Book.bookArray.size(); index2++ ) {
 					if(Book.bookArray.get(index2).getISBN().equals(checkedISBN)) {
 						System.out.println();
-						System.out.print("Enter a due year (YYYY): ");
-						int year = scan.nextInt();
-						System.out.println();
-						System.out.print("Enter a due month (MM): ");
-						int month = scan.nextInt();
-						System.out.println();
-						System.out.print("Enter a due day (DD): ");
-						int day = scan.nextInt();
-						System.out.println();
-						if(Date.isValid(day,month,year)) {
+						boolean tryit2 = true;
+						int year = -1;
+						int month = -1;
+						int day = -1;
+						do {
+							try {
+								System.out.print("Enter a due year (YYYY): ");
+								year = scan.nextInt();
+								scan.nextLine();
+								System.out.println();
+								System.out.print("Enter a due month (MM): ");
+								month = scan.nextInt();
+								scan.nextLine();
+								System.out.println();
+								System.out.print("Enter a due day (DD): ");
+								day = scan.nextInt();
+								System.out.println();
+								Date.DateValidator(day,month,year);
+								tryit2 = false;
+							}
+							catch(NotValidDateException e) {
+								System.err.println("Invalid date: " + day + "." + month + "." + year);
+							}
+							catch(Exception e) {
+								System.err.println("Please use a valid integer");
+							}
+							scan.nextLine();
+						}
+						while(tryit2);
+						if(!tryit2) {
 							if(member.appendToBookArray(Book.bookArray.get(index2))) {
 								Date date1 = new Date(day,month,year);
 								Book.bookArray.get(index2).setdueDate(date1);
@@ -250,8 +293,20 @@ public class Menu {
 					System.out.println();
 					return;
 				}
-				System.out.print("Enter the ISBN number of the book being returned: ");
-				String checkedISBN = scan.nextLine();
+				boolean tryit = true;
+				String checkedISBN = null;
+				do {
+					try {
+						System.out.print("Enter the ISBN number of the book being returned: ");
+						checkedISBN = scan.nextLine();
+						Book.authenticateISBN(checkedISBN);
+						tryit = false;
+					}
+					catch(Exception e) {
+						System.err.println("ISBN is invalid, please try again");
+					}
+				}
+				while(tryit);
 				Book tempBook = null; // book to be returned to the book array
 				for(int index2 = 0; index2 < RegularMember.regularMemberArray.get(member_location).checkedOutBookCount ; index2++ ) {
 					if(RegularMember.regularMemberArray.get(member_location).checkedoutBook.get(index2).getISBN().equals(checkedISBN)) {
@@ -306,16 +361,36 @@ public class Menu {
 				for(int index2 = 0; index2 < OnlineArticle.articleArray.size(); index2++ ) {
 					if(OnlineArticle.articleArray.get(index2).getDOI().equals(checkedDOI)) {
 						System.out.println();
-						System.out.print("Enter a access year (YYYY): ");
-						int year = scan.nextInt();
-						System.out.println();
-						System.out.print("Enter a access month (MM): ");
-						int month = scan.nextInt();
-						System.out.println();
-						System.out.print("Enter a access day (DD): ");
-						int day = scan.nextInt();
-						System.out.println();
-						if(Date.isValid(day,month,year)) {
+						boolean tryit2 = true;
+						int year = -1;
+						int month = -1;
+						int day = -1;
+						do {
+							try {
+								System.out.print("Enter a due year (YYYY): ");
+								year = scan.nextInt();
+								scan.nextLine();
+								System.out.println();
+								System.out.print("Enter a due month (MM): ");
+								month = scan.nextInt();
+								scan.nextLine();
+								System.out.println();
+								System.out.print("Enter a due day (DD): ");
+								day = scan.nextInt();
+								System.out.println();
+								Date.DateValidator(day,month,year);
+								tryit2 = false;
+							}
+							catch(NotValidDateException e) {
+								System.err.println("Invalid date: " + day + "." + month + "." + year);
+							}
+							catch(Exception e) {
+								System.err.println("Please use a valid integer");
+							}
+							scan.nextLine();
+						}
+						while(tryit2);
+						if(!tryit2) {
 							if(member.appendAccessedArticle(OnlineArticle.articleArray.get(index2))) {
 								Date date1 = new Date(day,month,year);
 								OnlineArticle.articleArray.get(index2).setAccessDate(date1);
@@ -582,3 +657,4 @@ public class Menu {
 		}
 	}
 }
+
