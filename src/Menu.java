@@ -222,7 +222,7 @@ public class Menu {
 								System.out.println();
 								Date.DateValidator(day,month,year);
 								tryit2 = false;
-							}
+							}	
 							catch(NotValidDateException e) {
 								System.err.println("Invalid date: " + day + "." + month + "." + year);
 							}
@@ -232,7 +232,7 @@ public class Menu {
 							scan.nextLine();
 						}
 						while(tryit2);
-						if(!tryit2) {
+						if(true) {
 							if(member.appendToBookArray(Book.bookArray.get(index2))) {
 								Date date1 = new Date(day,month,year);
 								Book.bookArray.get(index2).setdueDate(date1);
@@ -243,9 +243,6 @@ public class Menu {
 							else {
 								return;
 							}
-						}
-						else {
-							return;
 						}
 					}
 					if(!Book.bookArray.get(index2).getISBN().equals(checkedISBN)) {
@@ -390,20 +387,17 @@ public class Menu {
 							scan.nextLine();
 						}
 						while(tryit2);
-						if(!tryit2) {
+						if(true) {
 							if(member.appendAccessedArticle(OnlineArticle.articleArray.get(index2))) {
 								Date date1 = new Date(day,month,year);
 								OnlineArticle.articleArray.get(index2).setAccessDate(date1);
-								System.out.println("The article with name " + "'" + OnlineArticle.articleArray.get(index2).getNameOfArticle() + "' " + "(ISBN: " + OnlineArticle.articleArray.get(index2).getDOI() + ") is checked out by user " + RegularMember.regularMemberArray.get(index).getMemberName() + " is due " + date1.day + "/" + date1.month + "/" + date1.year);
+								System.out.println("The article with name " + "'" + OnlineArticle.articleArray.get(index2).getNameOfArticle() + "' " + "(DOI: " + OnlineArticle.articleArray.get(index2).getDOI() + ") is checked out by user " + RegularMember.regularMemberArray.get(index).getMemberName() + " is due " + date1.day + "/" + date1.month + "/" + date1.year);
 								OnlineArticle.articleArray.remove(OnlineArticle.articleArray.get(index2)); // removes the book from the library
 								return;
 							}
 							else {
 								return;
 							}
-						}
-						else {
-							return;
 						}
 					}
 					if(OnlineArticle.articleArray.get(index2).getDOI().equals(checkedDOI)) {

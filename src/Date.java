@@ -10,18 +10,15 @@ public class Date {
 		this.year = year;
 	}
 	
-	public static boolean isValid(int day,int month,int year) {
-		if(year <= 2000) {
-			System.out.println("Invalid year");
-			return false;
+	public static boolean DateValidator(int day,int month,int year) throws NotValidDateException {
+		if(year <= 2000 || year >= 2100) {
+			throw new NotValidDateException(null);
 		}
 		if(month <= 0 || month >= 13 ) {
-			System.out.println("Invalid month");
-			return false;
+			throw new NotValidDateException(null);
 		}
 		if(day <= 0 || day >= extremeDetailDate(month, year)) {
-			System.out.println("Invalid day");
-			return false;
+			throw new NotValidDateException(null);
 		}
 		return true;
 	}
@@ -44,23 +41,31 @@ public class Date {
 	@Override
 	public String toString() {
 		return day + "/" + month + "/" + year;
-	}
-	public static void DateValidator(int day, int month, int year) throws NotValidDateException{
-		int currentYear = AssigmentMain.currentDate.year;
-		int currentMonth = AssigmentMain.currentDate.month;
-		int currentDay = AssigmentMain.currentDate.day;
-		if(year != currentYear || month != currentMonth || day != currentDay) {
-			throw new NotValidDateException(null);
-		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
