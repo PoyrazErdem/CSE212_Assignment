@@ -31,8 +31,6 @@ public class Menuprinter extends JFrame{
 	    };
 		
 		ActionHandler handler = new ActionHandler();
-        Color defaultColor = new Color(40, 40, 40);
-        Color clickedColor = new Color(70, 70, 70);
         
 		for (JButton b : buttons) {
 	        b.setBorderPainted(false);
