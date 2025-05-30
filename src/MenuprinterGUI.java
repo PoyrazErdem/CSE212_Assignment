@@ -9,11 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Menuprinter extends JFrame{
+public class MenuprinterGUI extends JFrame{
 	private static JPanel mainPanel = new JPanel();
 	private JButton addBook = new JButton("Add a new book");
 	private JButton addArticle = new JButton("Add a new online article");
-	private JButton createMember = new JButton("Check out a book");
+	private JButton createMember = new JButton("Create a member");
 	private JButton checkoutBook = new JButton("Check out a book");
 	private JButton returnBook = new JButton("Return a book");
 	private JButton checkoutArticle = new JButton("Give access to an online article");
@@ -23,7 +23,7 @@ public class Menuprinter extends JFrame{
 	private JButton overduePayment = new JButton("Members with overdue payments");
 	private JButton exit = new JButton("Exit");
 	
-	public Menuprinter() {
+	public MenuprinterGUI() {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		JButton[] buttons = {
 			    addBook, addArticle, createMember, checkoutBook,returnBook, checkoutArticle, returnArticle,
@@ -70,19 +70,25 @@ public class Menuprinter extends JFrame{
 	private class ActionHandler implements ActionListener{
 		public void actionPerformed(ActionEvent	event) {
 			if(event.getSource() == addBook) {
-				
+				new AddBookGUI(MenuprinterGUI.this);
 			}
 			else if(event.getSource() == addArticle) {
-				
+				new AddArticleGUI(MenuprinterGUI.this);
+			}
+			else if(event.getSource() == createMember) {
+				new AddMemberGUI(MenuprinterGUI.this);
 			}
 			else if(event.getSource() == checkoutBook) {
-				
+				new CheckOutBookGUI(MenuprinterGUI.this);
 			}
 			else if(event.getSource() == returnBook) {
-				
+				new ReturnBook(MenuprinterGUI.this);
 			}
 			else if(event.getSource() == checkoutArticle) {
-				
+				new CheckOutArticle(MenuprinterGUI.this);
+			}
+			else if(event.getSource() == returnArticle) {
+				new ReturnArticle(MenuprinterGUI.this);
 			}
 			else if(event.getSource() == displayAll) {
 				

@@ -8,7 +8,7 @@ public class AssigmentMain {
 		//currentDate = new Date(today.getDayOfMonth(),today.getMonthValue(),today.getYear());
 		//Menu.menu();
 		
-		new Menuprinter();
+		new MenuprinterGUI();
 	}
 
 }

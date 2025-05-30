@@ -54,7 +54,7 @@ public class Menu {
 		System.out.println("3. Academic Member");
 		System.out.print("Your answer: ");
 	}
-	private static void add_book() {
+	public static void add_book() {
 		System.out.println();
 		System.out.print("Enter book name: ");
 		scan.nextLine();
